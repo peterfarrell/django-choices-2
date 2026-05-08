@@ -188,9 +188,9 @@ dependencies = [
 dev = [
     { name = "coverage" },
     { name = "ruff" },
-    { name = "tox" },
+    { name = "tox-uv-bare" },
 ]
-github = [
+github-actions = [
     { name = "tox-gh-actions" },
 ]
 
@@ -201,9 +201,9 @@ requires-dist = [{ name = "django", specifier = ">=4.2" }]
 dev = [
     { name = "coverage", specifier = ">=7.13.5" },
     { name = "ruff", specifier = ">=0.15.12" },
-    { name = "tox", specifier = ">=4.53.1" },
+    { name = "tox-uv-bare", specifier = ">=1.35.2" },
 ]
-github = [{ name = "tox-gh-actions", specifier = ">=3.5.0" }]
+github-actions = [{ name = "tox-gh-actions", specifier = ">=3.5.0" }]
 
 [[package]]
 name = "filelock"
@@ -340,6 +340,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/9c/11/6c3f818887c37a144a4b48bfc440150f006bdac7a68d92de1046680f578f/tox_gh_actions-3.5.0.tar.gz", hash = "sha256:cc8e148c4513042e5019973e5672594c3df241b035e7fb550f6f778588110051", size = 18815, upload-time = "2025-10-22T14:12:24.846Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fd/9e/8d50f3b3fc4af8c73154f64d4a2293bfa2d517a19000e70ef2d614254084/tox_gh_actions-3.5.0-py3-none-any.whl", hash = "sha256:070790114c92f4c94337047515ca5e077ceb269a5cb9366e0a0b3440a024eca1", size = 9910, upload-time = "2025-10-22T14:12:23.405Z" },
+]
+
+[[package]]
+name = "tox-uv-bare"
+version = "1.35.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging" },
+    { name = "tox" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0a/cb/168dc1ccf24e4065a9a0a33df55709ed2b5eb73bd2b13ddd53187e5dffb8/tox_uv_bare-1.35.2.tar.gz", hash = "sha256:49e28a804c97f23ea17e25859960c0fa78f35bccb7e14344cfd840e89a9aade9", size = 32333, upload-time = "2026-05-05T01:34:18.916Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5f/53/4a33dc81da39db7b31e5622333df361e8fe055b7ec636bd5fea762c9182d/tox_uv_bare-1.35.2-py3-none-any.whl", hash = "sha256:c0d590a41d1054a1ad0874e9e5943ff52402786e3d4599d8f8d37a65b566ef53", size = 22307, upload-time = "2026-05-05T01:34:17.681Z" },
 ]
 
 [[package]]
