@@ -43,7 +43,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - uses: astral-sh/setup-uv@v8.1.0
       - name: Install dependencies with uv
-        run: uv sync --frozen --dev --group=github
+        run: uv sync --frozen --dev --group=github-actions
       - name: Run tests with tox
         run: tox
         env:
