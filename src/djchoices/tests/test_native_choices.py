@@ -18,19 +18,19 @@ class Native(TextChoices):
 class NativeChoicesEquivalenceTests(unittest.TestCase):
     def test_labels(self):
         labels = ToMigrate.labels
-        native = dict(zip(Native.names, Native.labels))
+        native = dict(zip(Native.names, Native.labels, strict=True))
 
         self.assertEqual(native, labels)
 
     def test_values(self):
         values = ToMigrate.values
-        native = dict(zip(Native.values, Native.labels))
+        native = dict(zip(Native.values, Native.labels, strict=True))
 
         self.assertEqual(native, values)
 
     def test_attributes(self):
         attributes = ToMigrate.attributes
-        native = dict(zip(Native.values, Native.names))
+        native = dict(zip(Native.values, Native.names, strict=True))
 
         self.assertEqual(native, attributes)
 

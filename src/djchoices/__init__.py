@@ -1,5 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
 from pkg_resources import get_distribution
 
 from src.djchoices.choices import C, ChoiceItem, DjangoChoices

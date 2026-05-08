@@ -16,7 +16,7 @@ class PrivateAPITests(unittest.TestCase):
         self.assertEqual(Choices.labels.a, "A")
         self.assertEqual(Choices.labels.b, "B")
         with self.assertRaises(AttributeError):
-            Choices.labels.c
+            _ = Choices.labels.c
 
         keys = Choices.labels.keys()
-        self.assertEqual(set(keys), set(["a", "b"]))
+        self.assertEqual(set(keys), {"a", "b"})

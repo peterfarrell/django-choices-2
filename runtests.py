@@ -10,7 +10,7 @@ def get_suite():
 
     settings.configure(SECRET_KEY="dummy")
 
-    stdout.write("Discovering tests in '%s'..." % disc_folder)
+    stdout.write(f"Discovering tests in '%{disc_folder}'...")
     suite = unittest.TestSuite()
     loader = unittest.loader.defaultTestLoader
     suite.addTest(loader.discover(disc_folder, pattern="test*.py"))
