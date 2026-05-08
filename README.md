@@ -22,7 +22,10 @@ See the [documentation](https://django-choices-2.readthedocs.io/en/latest/) on R
 
 ## Acknowledgements
 
-A big thank you to the original authors of `django-choices` for their work on the original package.
+A big thank you to the original authors of `django-choices` for their work on the original package:
+
+* [Jason Webb](https://github.com/bigjason)
+* [Sergei Maertens](https://github.com/sergei-maertens)
 
 ## License
 

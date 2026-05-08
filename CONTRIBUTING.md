@@ -30,6 +30,20 @@ guidelines, all is well: https://docs.djangoproject.com/en/dev/internals/contrib
   source .ven/bin/activate
   ```
 
+## Format and Linting
+
+**Format:**
+
+```
+ruff format
+```
+
+**Linting:**
+
+```
+ruff check --fix
+```
+
 ## Tests
 
 All changes should be accompanied by a test that either tests the new behaviorr, or tests the regression. Make sure all the tests still pass after your changes - for your current Django and Python version this can be done by running:
@@ -50,19 +64,14 @@ When behavior changes or gets added, check whether the documentation needs updat
 
 ## Pull requests
 
-When you think the patch is ready, submit a pull request to the `develop` branch. If it's a bug fix, the maintainer(s) will take care of bumping the version and uploading to PyPI. Feel free to add yourself to the CONTRIBUTORS.md file.
+When you think the patch is ready, submit a pull request to the `develop` branch. If it's a bug fix, the maintainer(s) will take care of bumping the version and uploading to PyPI. Feel free to add yourself to the [CONTRIBUTORS.md](CONTRIBUTORS.md) file.
 
 ## Smaller style guidelines
 
 ### Commit(s)
 
-Try to keep commits as atomic as possible. It's fine to do many small commits before submitting the PR,
-you can always rebase your branch to make a nice commit history. A commit that adds the test, and
-then a different commit that fixes the issue/feature is reasonable, combining them is fine as well.
+Try to keep commits as atomic as possible. It's fine to do many small commits before submitting the PR, you can always rebase your branch to make a nice commit history. A commit that adds the test, and then a different commit that fixes the issue/feature is reasonable, combining them is fine as well.
 
 ### Code style
 
-* Stick to PEP8, with the exclusion of the 80-char max line length. 80 columns is a guideline, 120 is the
-  upper limit.
-* Use 4 spaces instead of tabs.
-* Follow https://docs.djangoproject.com/en/1.9/internals/contributing/writing-code/coding-style/
+* Stick to Ruff formatting and linting as setup in the `pyproject.toml`.
