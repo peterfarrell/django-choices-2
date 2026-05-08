@@ -1,7 +1,13 @@
-from pkg_resources import get_distribution
+from importlib.metadata import PackageNotFoundError, version
 
-from src.djchoices.choices import C, ChoiceItem, DjangoChoices
+from .choices import C, ChoiceItem, DjangoChoices
 
-__version__ = get_distribution("django-choices").version
+try:
+    # Get the version of the installed 'waybill' package
+    __version__ = version("django-choices")
+except PackageNotFoundError:
+    # Fallback for when the package is not installed
+    __version__ = "0.0.0"
+
 
 __all__ = ["ChoiceItem", "DjangoChoices", "C"]
