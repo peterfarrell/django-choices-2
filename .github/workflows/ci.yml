@@ -44,10 +44,8 @@ jobs:
       - uses: astral-sh/setup-uv@v8.1.0
       - name: Install dependencies with uv
         run: uv sync --frozen --dev --group=github-actions
-      - name: Activate virtual environment
-        run: source .venv/bin/activate
       - name: Run tests with tox
-        run: tox
+        run: uv run tox
         env:
           PYTHON_VERSION: ${{ matrix.python }}
           DJANGO: ${{ matrix.django }}
