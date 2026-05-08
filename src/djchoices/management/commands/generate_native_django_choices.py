@@ -2,7 +2,7 @@ from textwrap import indent
 
 from django.core.management.base import BaseCommand, no_translations
 
-from djchoices import DjangoChoices
+from src.djchoices import DjangoChoices
 
 
 def get_subclasses(cls):

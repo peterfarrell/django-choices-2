@@ -2,7 +2,7 @@ import unittest
 
 from django.db.models import TextChoices
 
-from djchoices import ChoiceItem, DjangoChoices
+from src.djchoices import ChoiceItem, DjangoChoices
 
 
 class ToMigrate(DjangoChoices):

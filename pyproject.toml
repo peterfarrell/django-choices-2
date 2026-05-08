@@ -1,0 +1,80 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-choices-2"
+version = "0.0.0"
+description = "Sanity for the django choices functionality."
+readme = "README.md"
+license = { file = "LICENSE", spdx_id = "MIT" }
+authors = [
+    { name = "PJ Farrell", email = "pj@mariska.dev" },
+]
+requires-python = ">=3.11"
+dependencies = [
+    "django>=4.2",
+]
+classifiers=[
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.13.5",
+    "ruff>=0.15.12",
+]
+
+[project-urls]
+Homepage = "https://github.com/peterfarrell/django-choices-2"
+Repository = "https://github.com/peterfarrell/django-choices-2/tree/main"
+Issues = "https://github.com/peterfarrell/django-choices-2/issues"
+Changelog = "https://github.com/peterfarrell/django-choices-2/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/djchoices"]
+
+[tool.uv]
+package = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 119
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # flake8-future-annotations
+    "FA",
+]
+
+[tool.coverage.run]
+omit = [
+    "src/djchoices/tests/*",
+]
+source = ["src/djchoices"]
+# Use the sys.monitoring engine for coverage on Python 3.12+ for better performance.
+# This is the config-based equivalent of setting the COVERAGE_CORE=sysmon environment variable.
+core = "sysmon"

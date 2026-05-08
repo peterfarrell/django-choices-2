@@ -2,7 +2,7 @@ import unittest
 
 from django.db.models import Case, IntegerField, Value, When
 
-from djchoices import C, ChoiceItem, DjangoChoices
+from src.djchoices import C, ChoiceItem, DjangoChoices
 
 
 class NumericTestClass(DjangoChoices):
