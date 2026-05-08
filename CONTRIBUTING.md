@@ -4,36 +4,53 @@ Open source projects shine when anyone can contribute, and this project is no di
 to adhere to in order to get your contribution merged in. In general, if you adhere to the Django contributing
 guidelines, all is well: https://docs.djangoproject.com/en/dev/internals/contributing/
 
-First, fork the repository and then clone it:
+## Setup
 
-  git glone git@github.com:your-username/django-choices.git
+1. Fork the repository in GitHub and then clone it:
 
-Make sure you have Django installed (a virtualenv is recommended), and the test dependencies:
+  ```
+  git clone git@github.com:<your-gh-username>/django-choices-2.git
+  ```
 
-  pip install Django tox
+2. Optional: Install `uv` if not installed
+
+  ```
+  pip install uv
+  ```
+
+3. Create the virtual environment and install dependencies:
+
+  ```
+  uv sync --dev
+  ```
+
+4. Activate the virtual environment:
+
+  ```
+  source .ven/bin/activate
+  ```
 
 ## Tests
 
-All changes should be accompanied by a test that either tests the new behaviour, or tests the regression.
-Make sure all the tests still pass after your changes - for your current Django and Python version this
-can be done by running:
+All changes should be accompanied by a test that either tests the new behaviorr, or tests the regression. Make sure all the tests still pass after your changes - for your current Django and Python version this can be done by running:
 
-  python runtests.py
+```
+python -m runtests
+```
 
-And to run the entire matrix of Django and tox versions:
+And to run the entire matrix of Django and Python versions using tox-uv:
 
-  tox
+```
+tox
+```
 
 ## Documentation
 
-When behaviour changes or gets added, check whether the documentation needs updates. If so, please
-submit a draft or final version.
+When behavior changes or gets added, check whether the documentation needs updates. If so, please submit a draft or final version.
 
 ## Pull requests
 
-When you think the patch is ready, submit a pull request to the `develop` branch. If it's a bug fix,
-the maintainer(s) will take care of bumping the version and uploading to PyPI. Feel free to add
-yourself to the CONTRIBUTORS.md file.
+When you think the patch is ready, submit a pull request to the `develop` branch. If it's a bug fix, the maintainer(s) will take care of bumping the version and uploading to PyPI. Feel free to add yourself to the CONTRIBUTORS.md file.
 
 ## Smaller style guidelines
 

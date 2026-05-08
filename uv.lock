@@ -177,7 +177,6 @@ wheels = [
 
 [[package]]
 name = "django-choices-2"
-version = "0.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "django", version = "5.2.14", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },

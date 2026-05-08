@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
 name = "django-choices-2"
-version = "0.0.0"
+dynamic = ["version"]
 description = "Sanity for the django choices functionality."
 readme = "README.md"
 license = { file = "LICENSE", spdx_id = "MIT" }
@@ -47,7 +47,11 @@ Repository = "https://github.com/peterfarrell/django-choices-2/tree/main"
 Issues = "https://github.com/peterfarrell/django-choices-2/issues"
 Changelog = "https://github.com/peterfarrell/django-choices-2/blob/main/CHANGELOG.md"
 
+[tool.uv]
+package = true
 
+[tool.hatch.version]
+source = "vcs"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/djchoices"]

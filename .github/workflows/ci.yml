@@ -49,9 +49,5 @@ jobs:
         env:
           PYTHON_VERSION: ${{ matrix.python }}
           DJANGO: ${{ matrix.django }}
-      - name: Generate coverage XML report
-        run: uv run coverage xml
       - name: Publish coverage report
         uses: codecov/codecov-action@v6
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
