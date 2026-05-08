@@ -42,11 +42,10 @@ Repository = "https://github.com/peterfarrell/django-choices-2/tree/main"
 Issues = "https://github.com/peterfarrell/django-choices-2/issues"
 Changelog = "https://github.com/peterfarrell/django-choices-2/blob/main/CHANGELOG.md"
 
+
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/djchoices"]
-
-[tool.uv]
-package = true
 
 [tool.ruff]
 target-version = "py311"
