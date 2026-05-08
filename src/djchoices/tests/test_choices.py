@@ -195,9 +195,7 @@ class DjangoChoices(unittest.TestCase):
 
     def test_deconstructible_validator(self):
         deconstructed = NumericTestClass.validator.deconstruct()
-        self.assertTrue(
-            deconstructed[0].endswith("djchoices.choices.ChoicesValidator")
-        )
+        self.assertTrue(deconstructed[0].endswith("djchoices.choices.ChoicesValidator"))
         self.assertEqual(deconstructed[1], (NumericTestClass.values,))
         self.assertEqual(deconstructed[2], {})
 
