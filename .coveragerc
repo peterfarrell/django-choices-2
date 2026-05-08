@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = djchoices
+source = src/djchoices
 
 [report]
 omit = */tests/*

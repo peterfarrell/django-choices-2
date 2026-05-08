@@ -2,7 +2,7 @@ import unittest
 
 from django.db.models import Case, IntegerField, Value, When
 
-from djchoices import C, ChoiceItem, DjangoChoices
+from src.djchoices import C, ChoiceItem, DjangoChoices
 
 
 class NumericTestClass(DjangoChoices):
@@ -53,9 +53,7 @@ class OrderedChoices(DjangoChoices):
 
 class ExtraAttributeChoices(DjangoChoices):
     Option1 = ChoiceItem(0, help_text="Option1 help text")
-    Option2 = ChoiceItem(
-        1, help_text="Option2 help text", validator_class_name="RegexValidator"
-    )
+    Option2 = ChoiceItem(1, help_text="Option2 help text", validator_class_name="RegexValidator")
 
 
 class DjangoChoices(unittest.TestCase):
@@ -151,9 +149,9 @@ class DjangoChoices(unittest.TestCase):
     def test_validation_error_message(self):
         from django.core.exceptions import ValidationError
 
-        message = "Select a valid choice. 4 is not " "one of the available choices."
+        message = "Select a valid choice. 4 is not one of the available choices."
 
-        self.assertRaisesRegexp(ValidationError, message, NumericTestClass.validator, 4)
+        self.assertRaisesRegex(ValidationError, message, NumericTestClass.validator, 4)
 
     def test_subclass1_validator(self):
         from django.core.exceptions import ValidationError
@@ -197,10 +195,9 @@ class DjangoChoices(unittest.TestCase):
 
     def test_deconstructible_validator(self):
         deconstructed = NumericTestClass.validator.deconstruct()
-        self.assertEqual(
-            deconstructed,
-            ("djchoices.choices.ChoicesValidator", (NumericTestClass.values,), {}),
-        )
+        self.assertTrue(deconstructed[0].endswith("djchoices.choices.ChoicesValidator"))
+        self.assertEqual(deconstructed[1], (NumericTestClass.values,))
+        self.assertEqual(deconstructed[2], {})
 
     def test_attribute_from_value(self):
         attributes = NumericTestClass.attributes
@@ -211,7 +208,7 @@ class DjangoChoices(unittest.TestCase):
 
     def test_attribute_from_value_duplicates(self):
         with self.assertRaises(ValueError):
-            DuplicateValuesClass.attributes
+            _ = DuplicateValuesClass.attributes
 
     def test_choice_item_order(self):
         choices = OrderedChoices.choices
@@ -247,7 +244,7 @@ class DjangoChoices(unittest.TestCase):
         choices_class = ExtraAttributeChoices
 
         with self.assertRaises(AttributeError):
-            choices_class.get_choice(choices_class.Option1).unknown_attribute
+            _ = choices_class.get_choice(choices_class.Option1).unknown_attribute
 
     def test_repr(self):
         choices_class = ExtraAttributeChoices

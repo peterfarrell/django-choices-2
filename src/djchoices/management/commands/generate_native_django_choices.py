@@ -2,7 +2,7 @@ from textwrap import indent
 
 from django.core.management.base import BaseCommand, no_translations
 
-from djchoices import DjangoChoices
+from src.djchoices import DjangoChoices
 
 
 def get_subclasses(cls):
@@ -12,8 +12,7 @@ def get_subclasses(cls):
 
 
 def iter_django_choices():
-    for cls in get_subclasses(DjangoChoices):
-        yield cls
+    yield from get_subclasses(DjangoChoices)
 
 
 BASE_CLS = {
@@ -51,13 +50,9 @@ class Command(BaseCommand):
         for cls in iter_django_choices():
             full_path = f"{cls.__module__}.{cls.__qualname__}"
 
-            value_types = set(
-                [type(choice_item.value) for choice_item in cls._fields.values()]
-            )
+            value_types = {type(choice_item.value) for choice_item in cls._fields.values()}
             if len(value_types) != 1:
-                self.stdout.write(
-                    f"  Choices do not have consistent value types: {value_types}"
-                )
+                self.stdout.write(f"  Choices do not have consistent value types: {value_types}")
                 continue
 
             value_type = list(value_types)[0]

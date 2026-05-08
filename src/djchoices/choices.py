@@ -17,13 +17,13 @@ class Labels(dict):
         if result is not None:
             return result
         else:
-            raise AttributeError("Label for field %s was not found." % name)
+            raise AttributeError(f"Label for field {name} was not found.")
 
     def __setattr__(self, name, value):
         self[name] = value
 
 
-class StaticProp(object):
+class StaticProp:
     def __init__(self, value):
         self.value = value
 
@@ -31,17 +31,14 @@ class StaticProp(object):
         return self.value
 
 
-class Attributes(object):
+class Attributes:
     def __init__(self, attrs, fields):
         self.attrs = attrs
         self.fields = fields
 
     def __get__(self, obj, objtype):
         if len(self.attrs) != len(self.fields):
-            raise ValueError(
-                "Not all values are unique, it's not possible to map all "
-                "values to the right attribute"
-            )
+            raise ValueError("Not all values are unique, it's not possible to map all values to the right attribute")
         return self.attrs
 
 
@@ -51,7 +48,7 @@ class Attributes(object):
 sentinel = object()
 
 
-class ChoiceItem(object):
+class ChoiceItem:
     """
     Describes a choice item.
 
@@ -74,12 +71,7 @@ class ChoiceItem(object):
             self.order = ChoiceItem.order
 
     def __repr__(self):
-        extras = " ".join(
-            [
-                "{key}={value!r}".format(key=key, value=value)
-                for key, value in self._extra.items()
-            ]
-        )
+        extras = " ".join([f"{key}={value!r}" for key, value in self._extra.items()])
 
         return "<{} value={!r} label={!r} order={!r}{extras}>".format(
             self.__class__.__name__,
@@ -92,10 +84,8 @@ class ChoiceItem(object):
     def __getattr__(self, name):
         try:
             return self._extra[name]
-        except KeyError:
-            raise AttributeError(
-                "{!r} object has no attribute {!r}".format(self.__class__, name)
-            )
+        except KeyError as e:
+            raise AttributeError(f"{self.__class__!r} object has no attribute {name!r}") from e
 
 
 # Shorter convenience alias.
@@ -110,8 +100,7 @@ class DjangoChoicesMeta(type):
     name_clean = re.compile(r"_+")
 
     def __iter__(self):
-        for choice in self.choices:
-            yield choice
+        yield from self.choices
 
     def __len__(self):
         return len(self.choices)
@@ -140,11 +129,7 @@ class DjangoChoicesMeta(type):
         for field_name in fields:
             val = fields[field_name]
             if isinstance(val, ChoiceItem):
-                if val.label is not None:
-                    label = val.label
-                else:
-                    # TODO: mark translatable by default?
-                    label = cls.name_clean.sub(" ", field_name)
+                label = val.label if val.label is not None else cls.name_clean.sub(" ", field_name)
 
                 val0 = label if val.value is sentinel else val.value
                 choices.append((val0, label))
@@ -162,20 +147,17 @@ class DjangoChoicesMeta(type):
         attrs["validator"] = ChoicesValidator(values)
         attrs["attributes"] = Attributes(attributes, fields)
 
-        return super(DjangoChoicesMeta, cls).__new__(cls, name, bases, attrs)
+        return super().__new__(cls, name, bases, attrs)
 
 
 @deconstructible
-class ChoicesValidator(object):
+class ChoicesValidator:
     def __init__(self, values):
         self.values = values
 
     def __call__(self, value):
         if value not in self.values:
-            raise ValidationError(
-                "Select a valid choice. %s is not "
-                "one of the available choices." % value
-            )
+            raise ValidationError(f"Select a valid choice. {value} is not one of the available choices.")
 
     def __eq__(self, other):
         return isinstance(other, ChoicesValidator) and self.values == other.values
@@ -220,9 +202,5 @@ class DjangoChoices(metaclass=DjangoChoicesMeta):
         """
         whens = []
         for choice_item in cls._fields.values():
-            whens.append(
-                When(
-                    **{field_name: choice_item.value, "then": Value(choice_item.order)}
-                )
-            )
+            whens.append(When(**{field_name: choice_item.value, "then": Value(choice_item.order)}))
         return Case(*whens, output_field=IntegerField())

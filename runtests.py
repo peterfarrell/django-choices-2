@@ -1,16 +1,16 @@
 import unittest
-from os import path
+from pathlib import Path
 from sys import stdout
 
 from django.conf import settings
 
 
 def get_suite():
-    disc_folder = path.abspath(path.dirname(__file__))
+    disc_folder = Path(__file__).resolve().parent / "src" / "djchoices" / "tests"
 
     settings.configure(SECRET_KEY="dummy")
 
-    stdout.write("Discovering tests in '%s'..." % disc_folder)
+    stdout.write(f"Discovering tests in '%{disc_folder}'...")
     suite = unittest.TestSuite()
     loader = unittest.loader.defaultTestLoader
     suite.addTest(loader.discover(disc_folder, pattern="test*.py"))

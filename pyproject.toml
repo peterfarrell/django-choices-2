@@ -1,0 +1,100 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-choices-2"
+dynamic = ["version"]
+description = "Sanity for the django choices functionality."
+readme = "README.md"
+license = { file = "LICENSE", spdx_id = "MIT" }
+authors = [
+    { name = "PJ Farrell", email = "pj@mariska.dev" },
+]
+requires-python = ">=3.11"
+dependencies = [
+    "django>=4.2",
+]
+classifiers=[
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.13.5",
+    "ruff>=0.15.12",
+    "tox-uv-bare>=1.35.2",
+]
+
+github-actions = [
+    "tox-gh-actions>=3.5.0",
+]
+
+[project-urls]
+Homepage = "https://github.com/peterfarrell/django-choices-2"
+Repository = "https://github.com/peterfarrell/django-choices-2/tree/main"
+Issues = "https://github.com/peterfarrell/django-choices-2/issues"
+Changelog = "https://github.com/peterfarrell/django-choices-2/blob/main/CHANGELOG.md"
+
+[tool.uv]
+package = true
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/djchoices"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 119
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # flake8-future-annotations
+    "FA",
+]
+
+[tool.coverage.run]
+omit = [
+    "src/djchoices/tests/*",
+]
+source = ["src/djchoices"]
+# Use the sys.monitoring engine for coverage on Python 3.12+ for better performance.
+# This is the config-based equivalent of setting the COVERAGE_CORE=sysmon environment variable.
+core = "sysmon"
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple/"
+publish-url = "https://upload.pypi.org/legacy/"
+explicit = true
